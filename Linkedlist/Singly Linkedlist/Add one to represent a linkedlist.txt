@@ -1,0 +1,51 @@
+class ListNode {
+    int data;
+    ListNode next;
+
+    public ListNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class Solution {
+    public ListNode reverse(ListNode head) {
+        ListNode curr = head;
+        ListNode prev = null;
+
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        return prev;
+    }
+
+    public ListNode addOne(ListNode head) {
+        int carry = 0;
+
+        head = reverse(head);
+        ListNode prev = null;
+        ListNode ref = head;
+
+        while (head != null) {
+            head.data = head.data + 1;
+            carry = head.data / 10;
+
+            if (carry != 0) {
+                head.data = head.data % 10;
+                prev = head;
+                head = head.next;
+            } else
+                break;
+        }
+
+        if (carry != 0)
+            prev.next = new ListNode(1);
+
+        head = reverse(ref);
+        return head;
+    }
+}
