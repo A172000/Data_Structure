@@ -1,0 +1,53 @@
+
+public class Solution
+{
+    public static Node sortList(Node head) {
+        // Write your code here
+
+        int zero = 0;
+        int one = 0;
+        int two = 0;
+
+         if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node curr = head;
+
+        // Count occurrences of 0, 1, and 2
+        while (curr != null) {
+            if (curr.data == 0) {
+                zero++;
+            } else if (curr.data == 1) {
+                one++;
+            } else {
+                two++;
+            }
+            curr = curr.next;
+        }
+
+        curr = head;
+
+        // Update the list with sorted values
+        while (zero > 0) {
+            curr.data = 0;
+            curr = curr.next;
+            zero--;
+        }
+
+        while (one > 0) {
+            curr.data = 1;
+            curr = curr.next;
+            one--;
+        }
+
+        while (two > 0) {
+            curr.data = 2;
+            curr = curr.next;
+            two--;
+        }
+
+        return head;
+    }
+
+    }

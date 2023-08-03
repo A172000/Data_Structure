@@ -1,0 +1,29 @@
+public class Solution
+
+{
+
+    public static int searchInLinkedList(ListNode head, int k)
+
+    {
+
+        // Write Your Code Here.
+
+        Node currentNode=head;
+
+        while(currentNode!=null){
+
+            if(currentNode.data==k){
+
+                return 1;
+
+            }
+
+            currentNode=currentNode.next;
+
+        }
+
+        return 0;
+
+    }
+
+}
