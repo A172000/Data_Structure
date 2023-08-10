@@ -1,0 +1,39 @@
+
+
+public class Solution
+{
+    public static int lengthOfLoop(Node head) {
+        // Write your code here
+        if(head==null || head.next==null){
+
+            return 0;
+
+        }
+
+        Node fast=head;
+
+        Node slow=head;
+
+        int count=1;
+
+        while(fast.next!=null && fast.next.next!=null){
+
+            fast=fast.next.next;
+
+            slow=slow.next;
+
+            if(fast==slow)
+		{   
+                while(slow.next!=fast){
+                    count++;
+                    slow=slow.next;
+                }
+                return count;
+
+            }
+
+        }
+
+        return 0;
+    }
+}
