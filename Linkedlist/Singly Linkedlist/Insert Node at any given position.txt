@@ -1,0 +1,98 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node nextNode;
+
+    Node(int data) {
+        this.data = data;
+        this.nextNode = null;
+    }
+}
+
+public class Main {
+
+    // Function to insert a Node at required position
+    static Node InsertPos(Node headNode, int position, int data) {
+        Node head = headNode;
+        if (position < 1) {
+            System.out.print("Invalid position");
+        } else {
+            // If position is 1, then the new node is
+            // set in front of the head node
+            // The head node is changing.
+            if (position == 1) {
+                Node newNode = new Node(data);
+                newNode.nextNode = headNode;
+                head = newNode;
+            } else {
+                while (position-- != 0) {
+                    if (position == 1) {
+                        // Adding Node at the required position
+                        Node newNode = new Node(data);
+
+                        // Making the new Node point to
+                        // the old Node at the same position
+                        newNode.nextNode = headNode.nextNode;
+
+                        // Replacing current with the new Node
+                        // to make the old Node point to the new Node
+                        headNode.nextNode = newNode;
+                        break;
+                    }
+                    headNode = headNode.nextNode;
+                }
+                if (position != 1)
+                    System.out.print("Position out of range");
+            }
+        }
+        return head;
+    }
+
+    // Function to print the linked list
+    static void printLinkedList(Node head) {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.nextNode;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Create the linked list from user input
+        Node head = null;
+        Node tail = null;
+
+        System.out.print("Enter the number of elements in the linked list: ");
+        int n = scanner.nextInt();
+
+        System.out.println("Enter the elements of the linked list:");
+        for (int i = 0; i < n; i++) {
+            int val = scanner.nextInt();
+            Node newNode = new Node(val);
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.nextNode = newNode;
+                tail = newNode;
+            }
+        }
+
+        System.out.print("Enter the position where you want to insert the new node: ");
+        int position = scanner.nextInt();
+
+        System.out.print("Enter the data for the new node: ");
+        int data = scanner.nextInt();
+
+        head = InsertPos(head, position, data);
+
+        System.out.println("\nLinked List after inserting at position " + position + ":");
+        printLinkedList(head);
+
+        scanner.close();
+    }
+}
