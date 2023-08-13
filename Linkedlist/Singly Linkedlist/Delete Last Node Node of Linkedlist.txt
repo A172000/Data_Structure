@@ -1,0 +1,78 @@
+import java.util.*;
+
+class ListNode {
+    int data;
+    ListNode next;
+
+    ListNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+class Solution {
+    public ListNode deleteLast(ListNode dummyNode) {
+        // Creating a dummy node 'head', and assigning it to 'list'
+        ListNode head = dummyNode;
+
+        while (head.next != null && head.next.next != null) {
+            head = head.next;
+        }
+
+        // Assigning the 'next' of the second last node 'NULL'.
+        head.next = null;
+        return dummyNode;
+    }
+}
+
+    // Function to print the linked list
+    class PrintLinkedList
+    {
+        public void printLinkedList(ListNode head) {
+            ListNode current = head;
+            while (current != null) {
+                System.out.print(current.data + " -> ");
+                current = current.next;
+            }
+            System.out.println("null");
+        }
+    }
+
+    public class Main
+    {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+
+            // Create the linked list from user input
+            ListNode head = null;
+            ListNode tail = null;
+
+            System.out.print("Enter the number of elements in the linked list: ");
+            int n = scanner.nextInt();
+
+            System.out.println("Enter the elements of the linked list:");
+            for (int i = 0; i < n; i++) {
+                int val = scanner.nextInt();
+                ListNode newNode = new ListNode(val);
+                if (head == null) {
+                    head = newNode;
+                    tail = newNode;
+                } else {
+                    tail.next = newNode;
+                    tail = newNode;
+                }
+            }
+            System.out.println("Original Linked List:");
+            PrintLinkedList print = new PrintLinkedList();
+            print.printLinkedList(head);
+
+            Solution solution = new Solution();
+            solution.deleteLast(head);
+
+            System.out.println("\nLinked List after deleting the last node:");
+            print.printLinkedList(head);
+
+            scanner.close();
+        }
+    }
+
+
