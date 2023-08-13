@@ -1,0 +1,84 @@
+import java.util.Scanner;
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+class Solution {
+    public void deleteNode(ListNode node)
+    {
+        if (node.next != null) {
+            node.val = node.next.val;
+            node.next = node.next.next;
+        } else {
+            // If node is the last node in the linked list
+            // Update the previous node's next pointer to null
+            ListNode head = null;
+            ListNode current = head;
+            while (current.next != node) {
+                current = current.next;
+            }
+            current.next = null;
+        }
+    }
+}
+
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Create the linked list from user input
+        ListNode head = null;
+        ListNode tail = null;
+
+        System.out.print("Enter the number of elements in the linked list: ");
+        int n = scanner.nextInt();
+
+        System.out.println("Enter the elements of the linked list:");
+        for (int i = 0; i < n; i++) {
+            int val = scanner.nextInt();
+            ListNode newNode = new ListNode(val);
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+
+        System.out.print("Enter the value of the node to delete: ");
+        int valToDelete = scanner.nextInt();
+
+        // Find the node to delete
+        ListNode nodeToDelete = head;
+        while (nodeToDelete != null && nodeToDelete.val != valToDelete) {
+            nodeToDelete = nodeToDelete.next;
+        }
+
+        if (nodeToDelete == null) {
+            System.out.println("Node not found in the linked list.");
+        } else {
+            Solution solution = new Solution();
+            solution.deleteNode(nodeToDelete);
+
+            System.out.println("Linked list after deleting the node:");
+            ListNode current = head;
+            while (current != null) {
+                System.out.print(current.val + " ");
+                current = current.next;
+            }
+            System.out.println();
+        }
+
+        scanner.close();
+    }
+}
