@@ -1,0 +1,96 @@
+Brute force approach:
+
+class Solution {
+public:
+	ListNode* middleNode(ListNode* head) {
+    	int n = 0;
+    	ListNode* temp = head;
+    	while(temp) {
+        	n++;
+        		temp = temp->next;
+    	}
+   	 
+    	temp = head;
+   	 
+    	for(int i = 0; i < n / 2; i++) {
+        		temp = temp->next;
+    	}
+   	 
+    	return temp;
+	}
+};
+
+
+
+Efficient: Tortoise-Hare-Approach:
+
+.
+import java.util.Scanner;
+
+// Definition for a singly-linked list node
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+/* This block of code is the constructor for the ListNode class. It takes an integer argument val and assigns it to the val variable of the current object (the node being created). It also sets the next variable to null, indicating that this node doesn't have a reference to another node yet.
+
+The purpose of this class is to create individual nodes that can be linked together to form a linked list. Each node contains a value and a reference to the next node in the list. By creating multiple instances of the ListNode class and setting the next references appropriately, you can build a linked list data structure. */
+
+class Solution 
+{
+	public ListNode middleNode(ListNode head) 
+	{
+		ListNode slow = head, fast = head;
+		while (fast != null && fast.next != null)  	
+	{
+		 /* In the while loop condition while (fast != null && fast.next != null), we are checking if fast not null and its next node is also not null. This condition ensures that we don't go out of bounds while moving the fast pointer. */
+
+		slow = slow.next;
+		fast = fast.next.next;
+
+		/* In each iteration of the loop, the 'slow' pointer moves one step forward (slow = slow.next) and the 'fast' pointer moves two   		    steps forward (fast = fast.next.next). This way, the 'fast' pointer will reach the end of the linked list when the 'slow' pointer 			    reaches the middle node. */
+	}
+		return slow;      
+	}
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Create a linked list based on user input
+        System.out.print("Enter the number of nodes: ");
+        int n = scanner.nextInt();
+
+        ListNode head = null;
+        ListNode tail = null;
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter the value of node " + (i+1) + ": ");
+            int val = scanner.nextInt();
+
+            ListNode newNode = new ListNode(val);
+
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = tail.next;
+            }
+        }
+
+        Solution solution = new Solution();
+        System.out.println("Middle node value: " + solution.middleNode(head).val);
+
+        scanner.close();
+    }
+}
