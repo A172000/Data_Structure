@@ -45,6 +45,8 @@ public class PreorderTraversal
         List<Integer> list = new LinkedList<Integer>();
         Stack<TreeNode> stack = new Stack<TreeNode>();
 
+        /*The given code snippet implements an iterative version of the preorder traversal algorithm using a stack to simulate the recursion.*/
+
         while (root != null) 
         {
             list.add(root.data);
